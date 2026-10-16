@@ -38,6 +38,9 @@ const Footer = () => {
           duration: 0.6,
           ease: "power4.out",
           stagger: 0.05,
+          onComplete: () => {
+            gsap.set([".footer-title", ".footer-title span"], { overflow: "visible" });
+          },
         },
         "-=0.3" // overlap slightly with socials animation
       );
@@ -45,6 +48,43 @@ const Footer = () => {
 
     return () => ctx.revert();
   }, []);
+
+  const bounceLetter = (el: HTMLElement) => {
+    gsap.killTweensOf(el);
+    gsap.set(el, { overflow: "visible" });
+    if (el.parentElement) gsap.set(el.parentElement, { overflow: "visible" });
+
+    gsap.timeline({ overwrite: "auto" })
+      .to(el, {
+        yPercent: -20,
+        duration: 0.18,
+        ease: "power2.out",
+      })
+      .to(el, {
+        yPercent: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.45,
+        ease: "bounce.out",
+      });
+  };
+
+  const bounceWord = (el: HTMLElement) => {
+    gsap.killTweensOf(el);
+    gsap.timeline({ overwrite: "auto" })
+      .to(el, {
+        y: -6,
+        duration: 0.18,
+        ease: "power2.out",
+      })
+      .to(el, {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.35,
+        ease: "bounce.out",
+      });
+  };
 
   return (
     <div
@@ -54,22 +94,63 @@ const Footer = () => {
       {/* Top footer content */}
       <div className="w-full md:w-7/10 max-w-xl md:max-w-3xl mx-auto px-4 footer-top flex flex-col items-center text-center text-sm text-gray-600">
         <div>
-          <p className="font-medium text-black mb-2">Channels</p>
+          <p
+            className="font-medium text-black mb-2 inline-block cursor-pointer"
+            onMouseEnter={(e) => bounceWord(e.currentTarget)}
+            onTouchStart={(e) => bounceWord(e.currentTarget)}
+          >
+            Channels
+          </p>
           <ul className="flex flex-wrap justify-center gap-3 sm:gap-6">
             <li>
-              <a href="#">Instagram</a>
+              <a
+                href="#"
+                className="inline-block cursor-pointer transition-colors hover:text-black"
+                onMouseEnter={(e) => bounceWord(e.currentTarget)}
+                onTouchStart={(e) => bounceWord(e.currentTarget)}
+              >
+                Instagram
+              </a>
             </li>
             <li>
-              <a href="#">YouTube</a>
+              <a
+                href="#"
+                className="inline-block cursor-pointer transition-colors hover:text-black"
+                onMouseEnter={(e) => bounceWord(e.currentTarget)}
+                onTouchStart={(e) => bounceWord(e.currentTarget)}
+              >
+                YouTube
+              </a>
             </li>
             <li>
-              <a href="#">Spotify</a>
+              <a
+                href="#"
+                className="inline-block cursor-pointer transition-colors hover:text-black"
+                onMouseEnter={(e) => bounceWord(e.currentTarget)}
+                onTouchStart={(e) => bounceWord(e.currentTarget)}
+              >
+                Spotify
+              </a>
             </li>
             <li>
-              <a href="#">Are.na</a>
+              <a
+                href="#"
+                className="inline-block cursor-pointer transition-colors hover:text-black"
+                onMouseEnter={(e) => bounceWord(e.currentTarget)}
+                onTouchStart={(e) => bounceWord(e.currentTarget)}
+              >
+                Are.na
+              </a>
             </li>
             <li>
-              <a href="#">X / Twitter</a>
+              <a
+                href="#"
+                className="inline-block cursor-pointer transition-colors hover:text-black"
+                onMouseEnter={(e) => bounceWord(e.currentTarget)}
+                onTouchStart={(e) => bounceWord(e.currentTarget)}
+              >
+                X / Twitter
+              </a>
             </li>
           </ul>
         </div>
@@ -78,7 +159,12 @@ const Footer = () => {
       {/* Giant footer text */}
       <h2 className="footer-title w-full text-[clamp(2.7rem,12vw,3.7rem)] sm:text-[18vw] md:text-[23.2vw] font-bold text-center text-black leading-[0.8] tracking-tighter overflow-hidden whitespace-nowrap select-none">
         {"ARCHIVE".split("").map((ch, idx) => (
-          <span key={idx} className="inline-block overflow-hidden">
+          <span
+            key={idx}
+            className="inline-block overflow-hidden cursor-pointer"
+            onMouseEnter={(e) => bounceLetter(e.currentTarget)}
+            onTouchStart={(e) => bounceLetter(e.currentTarget)}
+          >
             {ch === " " ? "\u00A0" : ch}
           </span>
         ))}
