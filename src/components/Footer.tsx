@@ -49,10 +49,10 @@ const Footer = () => {
   return (
     <div
       ref={footerRef}
-      className="relative z-[999] h-fit flex flex-col items-center gap-6 sm:gap-8 md:gap-10 p-4 sm:p-6 pt-4 md:pt-6 pb-8 md:pb-2 mt-4 md:mt-6 bg-background"
+      className="relative z-[999] w-full h-fit flex flex-col items-center gap-6 sm:gap-8 md:gap-10 p-4 sm:p-6 md:px-0 pt-4 md:pt-8 pb-8 md:pb-0 mt-4 md:mt-8 bg-background overflow-hidden"
     >
       {/* Top footer content */}
-      <div className="w-full md:w-7/10 mx-auto footer-top flex flex-col items-center text-center text-sm text-gray-600">
+      <div className="w-full md:w-7/10 max-w-xl md:max-w-3xl mx-auto px-4 footer-top flex flex-col items-center text-center text-sm text-gray-600">
         <div>
           <p className="font-medium text-black mb-2">Channels</p>
           <ul className="flex flex-wrap justify-center gap-3 sm:gap-6">
@@ -76,7 +76,7 @@ const Footer = () => {
       </div>
 
       {/* Giant footer text */}
-      <h2 className="footer-title text-[clamp(2.7rem,12vw,3.7rem)] sm:text-[4.5rem] md:text-[18rem] font-semibold text-center text-black leading-none overflow-hidden whitespace-nowrap select-none">
+      <h2 className="footer-title w-full text-[clamp(2.7rem,12vw,3.7rem)] sm:text-[18vw] md:text-[23.2vw] font-bold text-center text-black leading-[0.8] tracking-tighter overflow-hidden whitespace-nowrap select-none">
         {"ARCHIVE".split("").map((ch, idx) => (
           <span key={idx} className="inline-block overflow-hidden">
             {ch === " " ? "\u00A0" : ch}
