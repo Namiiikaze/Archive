@@ -16,15 +16,16 @@ const Panoramic3D: React.FC<Panoramic3DProps> = ({ images }) => {
     const canvas = canvasRef.current;
     if (!container || !canvas || images.length === 0) return;
 
-    const width = container.clientWidth || window.innerWidth;
-    const height = container.clientHeight || 240;
+    let width = container.clientWidth || window.innerWidth;
+    let height = container.clientHeight || 400;
 
     const scene = new THREE.Scene();
 
-    // Camera positioned close and level so images fill the strip clearly
+    // Camera positioned with comfortable depth to frame the full sweeping 3D arc
     const fov = 30;
+    const cameraDistance = 6.8;
     const camera = new THREE.PerspectiveCamera(fov, width / height, 0.1, 100);
-    camera.position.set(0, 0, 5.4);
+    camera.position.set(0, 0, cameraDistance);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -39,22 +40,23 @@ const Panoramic3D: React.FC<Panoramic3DProps> = ({ images }) => {
 
     // Edge-to-edge continuous 3D panoramic arc - zero gaps between images
     const count = images.length;
-    const panelWidth = 2.15;
-    const panelHeight = 2.45;
+    const panelWidth = 2.25;
+    const panelHeight = 2.75;
     const step = panelWidth; // 0 gap so panels touch seamlessly edge-to-edge
     const totalLength = count * step;
     const panelAspect = panelWidth / panelHeight;
 
-    // Large radius gives a subtle, readable 3D curve without deep distortion
-    const curveRadius = 18;
-    const segmentsX = 20;
+    const vHeight = 2 * cameraDistance * Math.tan(((fov / 2) * Math.PI) / 180);
+    let currentCurveRadius = Math.max(20, (width / height) * 4.6);
 
+    const segmentsX = 24;
     const baseGeo = new THREE.PlaneGeometry(panelWidth, panelHeight, segmentsX, 1);
     const basePositions = baseGeo.attributes.position.array as Float32Array;
 
     const geometries: THREE.BufferGeometry[] = [];
     const materials: THREE.MeshBasicMaterial[] = [];
     const textures: THREE.Texture[] = [];
+    const meshes: THREE.Mesh[] = [];
     const textureLoader = new THREE.TextureLoader();
 
     images.forEach((imgUrl) => {
@@ -93,20 +95,32 @@ const Panoramic3D: React.FC<Panoramic3DProps> = ({ images }) => {
       });
 
       const mesh = new THREE.Mesh(geo, mat);
-      // Disable frustum culling because vertex positions are dynamically deformed each frame
       mesh.frustumCulled = false;
       scene.add(mesh);
+      meshes.push(mesh);
     });
 
-    // Update each panel's vertices along a shallow, gapless 3D panoramic arc
+    // Update each panel's vertices along the continuous 3D panoramic arc
     const updateArcPositions = (scrollOffset: number) => {
       const halfTrack = totalLength / 2;
+      const vWidth = vHeight * (width / height);
+      // Only render panels within visible reach to prevent wrapping behind the camera
+      const maxVisibleS = vWidth / 2 + step * 1.5;
 
       for (let i = 0; i < count; i++) {
-        // Wrap arc position seamlessly into [-halfTrack, +halfTrack]
         let centerS = (i * step - scrollOffset) % totalLength;
         if (centerS < -halfTrack) centerS += totalLength;
         if (centerS > halfTrack) centerS -= totalLength;
+
+        const mesh = meshes[i];
+        if (!mesh) continue;
+
+        // Cull panels that are safely outside the viewport so they never clip through the camera
+        if (Math.abs(centerS) > maxVisibleS) {
+          if (mesh.visible) mesh.visible = false;
+          continue;
+        }
+        if (!mesh.visible) mesh.visible = true;
 
         const posAttr = geometries[i].attributes.position;
         for (let v = 0; v < posAttr.count; v++) {
@@ -114,11 +128,11 @@ const Panoramic3D: React.FC<Panoramic3DProps> = ({ images }) => {
           const localY = basePositions[v * 3 + 1];
 
           const s = centerS + localX;
-          const theta = s / curveRadius;
+          const theta = s / currentCurveRadius;
 
-          // Gentle concave 3D curve: center sits at z = 0, edges curve slightly forward
-          const x = curveRadius * Math.sin(theta);
-          const z = curveRadius * (1 - Math.cos(theta)) * 0.55;
+          // Smooth 3D curve: center sits at z = 0, edges curve cleanly forward to screen edges
+          const x = currentCurveRadius * Math.sin(theta);
+          const z = currentCurveRadius * (1 - Math.cos(theta)) * 0.55;
 
           posAttr.setXYZ(v, x, localY, z);
         }
@@ -167,11 +181,14 @@ const Panoramic3D: React.FC<Panoramic3DProps> = ({ images }) => {
 
     const handleResize = () => {
       if (!container) return;
-      const newW = container.clientWidth || window.innerWidth;
-      const newH = container.clientHeight || 240;
-      camera.aspect = newW / newH;
+      width = container.clientWidth || window.innerWidth;
+      height = container.clientHeight || 400;
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(newW, newH);
+      renderer.setSize(width, height);
+
+      currentCurveRadius = Math.max(20, (width / height) * 4.6);
+      updateArcPositions(motionState.offset);
     };
 
     window.addEventListener("resize", handleResize);
@@ -193,7 +210,7 @@ const Panoramic3D: React.FC<Panoramic3DProps> = ({ images }) => {
   return (
     <div
       ref={mountRef}
-      className="relative w-full h-[150px] sm:h-[180px] md:h-[220px] lg:h-[250px] overflow-hidden select-none"
+      className="relative w-full h-[400px] overflow-hidden select-none"
     >
       <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
@@ -201,3 +218,4 @@ const Panoramic3D: React.FC<Panoramic3DProps> = ({ images }) => {
 };
 
 export default Panoramic3D;
+
