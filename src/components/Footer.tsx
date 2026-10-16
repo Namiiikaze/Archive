@@ -5,6 +5,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 const Footer = () => {
   const footerRef = useRef<HTMLDivElement | null>(null);
+  const entranceCompletedRef = useRef(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -17,6 +18,18 @@ const Footer = () => {
           trigger: footerRef.current,
           start: "top 90%",
           toggleActions: "play none none reverse",
+          onEnter: () => {
+            entranceCompletedRef.current = false;
+          },
+          onLeaveBack: () => {
+            entranceCompletedRef.current = false;
+          },
+        },
+        onComplete: () => {
+          entranceCompletedRef.current = true;
+        },
+        onReverseComplete: () => {
+          entranceCompletedRef.current = false;
         },
       });
 
@@ -49,6 +62,7 @@ const Footer = () => {
   }, []);
 
   const bounceLetter = (el: HTMLElement) => {
+    if (!entranceCompletedRef.current) return;
     gsap.killTweensOf(el);
     gsap.timeline({ overwrite: "auto" })
       .to(el, {
@@ -59,8 +73,6 @@ const Footer = () => {
       })
       .to(el, {
         scale: 1,
-        yPercent: 0,
-        opacity: 1,
         duration: 0.65,
         ease: "back.out(1.7)",
         transformOrigin: "center center",
@@ -68,6 +80,7 @@ const Footer = () => {
   };
 
   const bounceWord = (el: HTMLElement) => {
+    if (!entranceCompletedRef.current) return;
     gsap.killTweensOf(el);
     gsap.timeline({ overwrite: "auto" })
       .to(el, {
@@ -78,8 +91,6 @@ const Footer = () => {
       })
       .to(el, {
         scale: 1,
-        y: 0,
-        opacity: 1,
         duration: 0.5,
         ease: "back.out(1.7)",
         transformOrigin: "center center",
