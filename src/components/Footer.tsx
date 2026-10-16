@@ -16,7 +16,7 @@ const Footer = () => {
         scrollTrigger: {
           trigger: footerRef.current,
           start: "top 90%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none reverse",
         },
       });
 
@@ -38,26 +38,22 @@ const Footer = () => {
           duration: 0.6,
           ease: "power4.out",
           stagger: 0.05,
-          onComplete: () => {
-            gsap.set([".footer-title", ".footer-title span"], { overflow: "visible" });
-          },
         },
         "-=0.3" // overlap slightly with socials animation
       );
     }, footerRef);
+
+    ScrollTrigger.refresh();
 
     return () => ctx.revert();
   }, []);
 
   const bounceLetter = (el: HTMLElement) => {
     gsap.killTweensOf(el);
-    gsap.set(el, { overflow: "visible" });
-    if (el.parentElement) gsap.set(el.parentElement, { overflow: "visible" });
-
     gsap.timeline({ overwrite: "auto" })
       .to(el, {
-        yPercent: -20,
-        duration: 0.18,
+        yPercent: -14,
+        duration: 0.16,
         ease: "power2.out",
       })
       .to(el, {

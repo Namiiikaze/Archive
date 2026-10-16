@@ -84,10 +84,10 @@ const Testimonials = () => {
       <div ref={containerRef} className="relative p-4 sm:p-6 pb-2">
         {/* heading */}
         <div className="flex flex-col md:flex-row gap-3 sm:gap-5 md:gap-20 mb-4 sm:mb-6 p-2">
-          <h2 className="text-2xl sm:text-3xl max-w-[950px] overflow-hidden Testimonials">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight max-w-[950px] overflow-hidden Testimonials">
             <span className="block">Voices of the Archive</span>
           </h2>
-          <p className="max-w-[280px] sm:max-w-xs md:max-w-sm text-xs sm:text-sm leading-relaxed text-gray-600">
+          <p className="max-w-[280px] sm:max-w-xs md:max-w-sm text-xs sm:text-sm md:text-base leading-relaxed text-gray-600">
             {"Vinyl scratches and fabrics fade with time, but preserving the voices, rhythms, and garments of Nigeria's pioneers keeps our creative spirit eternal."
               .split(" ")
               .map((word, idx) => (
@@ -113,12 +113,16 @@ const Testimonials = () => {
                   height={64}
                   className="size-12 sm:size-16 mb-4 sm:mb-6 object-contain"
                 />
-                <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-medium leading-snug mb-4 sm:mb-6 pr-2 sm:pr-8">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-snug tracking-tight mb-4 sm:mb-6 pr-2 sm:pr-8">
                   “{review.quote}”
                 </p>
-                <div className="text-base sm:text-lg">
-                  <h2 className="font-semibold">{review.name}</h2>
-                  <h4 className="text-gray-500 text-sm sm:text-base">{review.role}</h4>
+                <div className="space-y-0.5">
+                  <h2 className="text-base sm:text-lg md:text-xl font-semibold leading-snug tracking-tight">
+                    {review.name}
+                  </h2>
+                  <h4 className="text-gray-500 text-xs sm:text-sm md:text-base leading-normal">
+                    {review.role}
+                  </h4>
                 </div>
               </div>
             ))}

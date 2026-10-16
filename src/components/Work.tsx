@@ -73,7 +73,6 @@ const services: Service[] = [
   },
 ];
 
-
 const Work = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -99,7 +98,7 @@ const Work = () => {
   return (
     <div ref={containerRef} className="relative z-[400] h-fit p-4 sm:p-6 lg:p-10">
       {/* heading */}
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl max-w-[950px] overflow-hidden title mb-4 sm:mb-6">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight max-w-[950px] overflow-hidden title mb-4 sm:mb-6">
         <span className="block">Music &amp; Fashion Disciplines</span>
       </h2>
 
@@ -138,13 +137,13 @@ const Card: React.FC<Service> = ({
   return (
     <div className="sticky top-0 left-0 bg-background min-h-screen lg:h-screen flex flex-col justify-start gap-4 md:gap-6 my-3 md:my-5 p-4 sm:p-6 lg:p-8 overflow-y-auto lg:overflow-hidden">
       {/* Top Content Row */}
-      <div className="flex flex-col lg:flex-row justify-between gap-4 md:gap-6 lg:gap-10">
-        {/* Left Side */}
-        <div className="lg:flex-[0.42] flex flex-row justify-between items-baseline lg:items-start gap-4">
-          <h2 className="text-5xl sm:text-7xl md:text-8xl xl:text-9xl font-medium tracking-tight shrink-0">
+      <div className="flex flex-col lg:flex-row justify-between gap-3 sm:gap-4 md:gap-6 lg:gap-10">
+        {/* Left Side: Stacked vertically on mobile, side-by-side from sm upwards */}
+        <div className="lg:flex-[0.42] flex flex-col sm:flex-row justify-between items-start sm:items-baseline lg:items-start gap-2 sm:gap-4">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-medium tracking-tighter leading-none shrink-0">
             {id}
           </h2>
-          <h4 className="text-base sm:text-lg md:text-xl font-medium max-w-[240px] text-right lg:text-left">
+          <h4 className="text-lg sm:text-lg md:text-xl font-semibold leading-snug tracking-tight sm:max-w-[240px] text-left sm:text-right lg:text-left">
             {title}
           </h4>
         </div>
@@ -152,7 +151,7 @@ const Card: React.FC<Service> = ({
         {/* Right Side */}
         <div className="lg:flex-[0.55] flex flex-col justify-start items-start gap-3 md:gap-4">
           {/* Description */}
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             {description}
           </p>
 
@@ -182,7 +181,7 @@ const Card: React.FC<Service> = ({
             )}
 
             {/* Prominent Musicians & Fashion Details */}
-            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm leading-snug tracking-wide">
               {services.map((group, i) => (
                 <ul key={i} className="text-light space-y-1">
                   {group.map((item, j) => (
