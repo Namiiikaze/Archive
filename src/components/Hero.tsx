@@ -202,7 +202,7 @@ const Hero = () => {
               pRefs.current.push(el);
             }
           }}
-          className="hero-text underline opacity-0 translate-y-6 text-xs sm:text-sm md:text-base text-center max-w-[260px] sm:max-w-none"
+          className="hero-text opacity-0 translate-y-6 text-xs sm:text-sm md:text-base text-center max-w-[260px] sm:max-w-none"
         >
           making the past impossible to ignore
         </p>
@@ -229,7 +229,7 @@ const Hero = () => {
               pRefs.current.push(el);
             }
           }}
-          className="hero-text underline opacity-0 translate-y-6 text-xs sm:text-sm md:text-base text-center max-w-[260px] sm:max-w-none"
+          className="hero-text opacity-0 translate-y-6 text-xs sm:text-sm md:text-base text-center max-w-[260px] sm:max-w-none"
         >
           music &amp; fashion across generations
         </p>

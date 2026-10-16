@@ -52,16 +52,18 @@ const Footer = () => {
     gsap.killTweensOf(el);
     gsap.timeline({ overwrite: "auto" })
       .to(el, {
-        yPercent: -14,
-        duration: 0.16,
-        ease: "power2.out",
+        scale: 0.35,
+        duration: 0.4,
+        ease: "power2.inOut",
+        transformOrigin: "center center",
       })
       .to(el, {
-        yPercent: 0,
         scale: 1,
+        yPercent: 0,
         opacity: 1,
-        duration: 0.45,
-        ease: "bounce.out",
+        duration: 0.65,
+        ease: "back.out(1.7)",
+        transformOrigin: "center center",
       });
   };
 
@@ -69,16 +71,18 @@ const Footer = () => {
     gsap.killTweensOf(el);
     gsap.timeline({ overwrite: "auto" })
       .to(el, {
-        y: -6,
-        duration: 0.18,
-        ease: "power2.out",
+        scale: 0.85,
+        duration: 0.3,
+        ease: "power2.inOut",
+        transformOrigin: "center center",
       })
       .to(el, {
-        y: 0,
         scale: 1,
+        y: 0,
         opacity: 1,
-        duration: 0.35,
-        ease: "bounce.out",
+        duration: 0.5,
+        ease: "back.out(1.7)",
+        transformOrigin: "center center",
       });
   };
 
