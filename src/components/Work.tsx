@@ -179,37 +179,30 @@ const Card: React.FC<Service> = ({
   fashionImages,
 }) => {
   return (
-<<<<<<< HEAD
     <div className="era-card sticky top-0 left-0 bg-background min-h-screen flex flex-col justify-start pt-5 sm:pt-6 lg:pt-8 px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-28 mb-[24vh] md:mb-[32vh] last:mb-8">
       <div className="era-card-inner flex flex-col justify-start gap-5 md:gap-7 w-full">
-        {/* Top Content Row */}
-        <div className="flex flex-col lg:flex-row justify-between gap-4 sm:gap-5 md:gap-6 lg:gap-10">
-          {/* Left Side: Stacked vertically on mobile, side-by-side from sm upwards */}
-          <div className="lg:flex-[0.42] flex flex-col sm:flex-row justify-between items-start sm:items-baseline lg:items-start gap-2 sm:gap-4">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-medium tracking-tighter leading-none shrink-0">
-              {id}
-            </h2>
-            <h4 className="text-lg sm:text-lg md:text-xl font-semibold leading-snug tracking-tight sm:max-w-[240px] text-left sm:text-right lg:text-left">
-              {title}
-            </h4>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[0.22fr_0.22fr_0.56fr] items-start gap-4 sm:gap-6 lg:gap-24">
+          <h2 className="shrink-0 text-5xl font-medium leading-none tracking-tighter sm:text-6xl md:text-7xl xl:text-8xl">
+            {id}
+          </h2>
 
-          {/* Right Side */}
-          <div className="lg:flex-[0.55] flex flex-col justify-start items-start gap-4 md:gap-5">
-            {/* Description */}
-            <p className="text-sm sm:text-base md:text-lg leading-relaxed">
+          <h4 className="self-start text-sm font-normal leading-snug tracking-tight text-neutral-600 sm:max-w-[240px] lg:justify-self-center lg:text-center">
+            {title}
+          </h4>
+
+          <div className="flex w-full flex-col items-start justify-start gap-4 md:gap-5">
+            <p className="max-w-none text-2xl font-normal leading-snug text-neutral-900">
               {description}
             </p>
 
-            {/* Video Placeholder + Era Details Side-by-Side on larger screens */}
-            <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 md:gap-6 lg:gap-8 mt-2 md:mt-3">
+            <div className="mt-2 flex w-full flex-col items-start gap-4 sm:flex-row sm:items-start md:mt-3 md:gap-6 lg:gap-8">
               {media.type === "image" ? (
                 <Image
                   src={media.url}
                   alt={title}
                   width={280}
                   height={160}
-                  className="h-[120px] sm:h-[140px] w-full sm:w-[220px] md:w-[250px] object-cover shrink-0 rounded"
+                  className="h-[150px] w-full shrink-0 rounded object-cover sm:h-[170px] sm:w-[260px] md:w-[320px]"
                 />
               ) : (
                 <iframe
@@ -219,70 +212,20 @@ const Card: React.FC<Service> = ({
                     .split("/")
                     .pop()}`}
                   title={title}
-                  className="h-[120px] sm:h-[140px] w-full sm:w-[220px] md:w-[250px] object-cover shrink-0 rounded"
+                  className="h-[150px] w-full shrink-0 rounded sm:h-[170px] sm:w-[260px] md:w-[320px]"
                   frameBorder="0"
                   allow="autoplay; encrypted-media; picture-in-picture"
                   allowFullScreen
                 />
               )}
 
-              {/* Prominent Musicians & Fashion Details */}
-              <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm leading-snug tracking-wide">
-                {services.map((group, i) => (
-                  <ul key={i} className="text-light space-y-1">
-                    {group.map((item, j) => (
-                      <li key={j} className="whitespace-normal sm:whitespace-nowrap">{item}</li>
-                    ))}
-                  </ul>
+              <div className="grid flex-1 grid-cols-2 gap-x-4 gap-y-1 text-xs leading-snug tracking-wide text-light sm:text-sm">
+                {services.map((item) => (
+                  <span key={item} className="whitespace-normal">
+                    {item}
+                  </span>
                 ))}
               </div>
-=======
-    <div className="sticky top-0 left-0 flex min-h-screen flex-col justify-start gap-4 overflow-y-auto bg-background p-4 md:gap-6 md:p-6 lg:h-screen lg:overflow-hidden lg:p-8">
-      <div className="grid grid-cols-[0.22fr_0.22fr_0.56fr] items-start gap-24">
-        <h2 className="shrink-0 text-5xl font-medium leading-none tracking-tighter sm:text-6xl md:text-7xl xl:text-8xl">
-          {id}
-        </h2>
-
-        <h4 className="self-start text-sm font-normal leading-snug tracking-tight text-neutral-600 sm:max-w-[240px] lg:justify-self-center lg:text-center">
-          {title}
-        </h4>
-
-        <div className="flex w-full flex-col items-start justify-start gap-3 md:gap-4">
-          <p className="max-w-none text-2xl font-normal leading-snug text-neutral-900">
-            {description}
-          </p>
-
-          <div className="mt-2 flex w-full flex-col items-start gap-4 sm:flex-row sm:items-start md:mt-4 md:gap-6 lg:gap-8">
-            {media.type === "image" ? (
-              <Image
-                src={media.url}
-                alt={title}
-                width={280}
-                height={160}
-                className="h-[150px] w-full shrink-0 rounded object-cover sm:h-[170px] sm:w-[260px] md:w-[320px]"
-              />
-            ) : (
-              <iframe
-                src={`${
-                  media.url
-                }?autoplay=1&mute=1&controls=0&loop=1&playlist=${media.url
-                  .split("/")
-                  .pop()}`}
-                title={title}
-                className="h-[150px] w-full shrink-0 rounded sm:h-[170px] sm:w-[260px] md:w-[320px]"
-                frameBorder="0"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            )}
-
-            <div className="grid flex-1 grid-cols-2 gap-x-4 gap-y-1 text-xs leading-snug tracking-wide text-light sm:text-sm">
-              {services.map((item) => (
-                <span key={item} className="whitespace-normal">
-                  {item}
-                </span>
-              ))}
->>>>>>> a9d122a3b95d9f25e0e85b48bce676dd316a6243
             </div>
           </div>
         </div>

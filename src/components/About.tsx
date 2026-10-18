@@ -94,14 +94,14 @@ const About = () => {
       ref={containerRef}
       className="p-4 sm:p-6 lg:p-10"
     >
-      <div className="flow-root pt-10 sm:pt-14 lg:pt-6">
-        <div className="mb-6 sm:mb-8 md:float-left md:mb-0 md:w-[34%] md:pr-6">
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between pt-10 sm:pt-14 lg:pt-6">
+        <div className="mb-4 sm:mb-6 md:mb-0 md:w-[34%] md:pr-6 shrink-0">
           <span className="title block overflow-hidden text-base font-medium sm:text-lg">
             <span className="block">The Archive</span>
           </span>
         </div>
 
-        <p className="bio max-w-[1500px] pt-2 text-2xl leading-[1.18] tracking-tight sm:pt-2.5 sm:text-3xl md:pt-3 lg:pt-4 lg:text-4xl">
+        <p className="bio md:w-[66%] ml-auto max-w-[950px] text-2xl leading-[1.18] tracking-tight sm:text-3xl lg:text-4xl">
           {bioText.split(" ").map((word, idx) => (
             <span
               key={idx}
