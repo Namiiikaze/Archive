@@ -11,7 +11,7 @@ const services: Service[] = [
     id: "1960",
     title: "Highlife & Independence",
     description:
-      "Independence ignited a golden renaissance — where brass-driven Highlife met regal hand-woven Aso-Oke and sharp post-colonial tailoring.",
+      "Independence ignited a golden renaissance, where brass-driven Highlife met regal hand-woven Aso-Oke and sharp post-colonial tailoring.",
     media: {
       type: "video",
       url: "https://www.youtube.com/embed/z5nd1SjB7rA",
@@ -23,7 +23,7 @@ const services: Service[] = [
     id: "1980",
     title: "Afrobeat & Maximalism",
     description:
-      "Sonic rebellion meets maximalist style — from militant Afrobeat horns at the Shrine to shimmering Jùjú guitars and silk boubous.",
+      "Sonic rebellion meets maximalist style, from militant Afrobeat horns at the Shrine to shimmering Jùjú guitars and silk boubous.",
     media: {
       type: "video",
       url: "https://www.youtube.com/embed/7h8R6PH0kzg",
@@ -35,7 +35,7 @@ const services: Service[] = [
     id: "1990",
     title: "Street Reggae & Nollywood",
     description:
-      "Ajegunle street rhythm fuses with screen glamour — marked by conscious roots reggae, modern Fuji beats, and masked mystique.",
+      "Ajegunle street rhythm fuses with screen glamour, marked by conscious roots reggae, modern Fuji beats, and masked mystique.",
     media: {
       type: "video",
       url: "https://www.youtube.com/embed/vveYFgRIutw",
@@ -47,7 +47,7 @@ const services: Service[] = [
     id: "2000",
     title: "Y2K & Afrobeats Dawn",
     description:
-      "The digital pop explosion that rewired African sound — uniting nostalgic Y2K street style with fearless global swagger.",
+      "The digital pop explosion that rewired African sound, uniting nostalgic Y2K street style with fearless global swagger.",
     media: {
       type: "video",
       url: "https://www.youtube.com/embed/fvhbCjpeKLY",
